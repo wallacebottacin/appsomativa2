@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout código
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Build
         run: echo 'Etapa concluída com sucesso!'
@@ -23,15 +23,15 @@ jobs:
 
     steps:
       - name: Checkout código
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Install CodeQL
-        uses: github/codeql-action/init@v1
+      - name: Instala o template de segurança SAST via CodeQL
+        uses: github/codeql-action/init@v2
         with:
           languages: html, javascript
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+      - name: Executa a análise de segurança SAST via CodeQL
+        uses: github/codeql-action/analyze@v2
         with:
           language: javascript
 
@@ -39,6 +39,6 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Deploy
         run: echo "Finalizado!"
