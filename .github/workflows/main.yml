@@ -30,6 +30,8 @@ jobs:
 
       - name: Análise de segurança SAST
         uses: github/codeql-action/analyze@v2
+        with:
+          languages: javascript
 
   deploy:
     needs: test
