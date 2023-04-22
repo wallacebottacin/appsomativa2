@@ -1,9 +1,10 @@
 name: Atividade Somativa 2 - DevOps
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
-    branches:
-      - master
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
