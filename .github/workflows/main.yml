@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build
-        run: echo 'Etapa concluída com sucesso!'
+        run: docker build -t appwebsomativa2 .
 
   test-job:
     needs: build-job
