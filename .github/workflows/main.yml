@@ -25,6 +25,7 @@ jobs:
       - run: docker push wbotta/appwebsomativa2
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -32,7 +33,7 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t appwebsomativa2 .
-        
+
       - name: Run SAST test
         uses: shiftleftsecurity/sast-scan@v2.1.1
         with:
