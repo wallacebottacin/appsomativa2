@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout código
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Build
         run: echo 'Etapa concluída com sucesso!'
@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout código
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Template de Segurança SAST
         uses: github/codeql-action/init@v2
@@ -40,6 +40,6 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Deploy
         run: echo "Finalizado!"
