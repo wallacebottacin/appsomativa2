@@ -1,0 +1,40 @@
+name: Atividade Somativa 2 - DevOps
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v2
+
+    - name: Build
+      run: echo 'Etapa concluída com sucesso!'
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v2
+
+    - name: Template de Segurança SAST
+      uses: github/codeql-action/init@v1
+
+    - name: Análise de segurança SAST
+      uses: github/codeql-action/analyze@v1
+      with:
+        languages: javascript
+
+  deploy:
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Finalizado!"
