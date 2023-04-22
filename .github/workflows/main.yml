@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-job:
-    runs-on: nginx:alpine
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Build
@@ -17,7 +17,7 @@ jobs:
 
   test-job:
     needs: build-job
-    runs-on: nginx:alpine
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Instalação de dependências
@@ -30,7 +30,7 @@ jobs:
           fail-on-error: true
 
   deploy-job:
-    runs-on: nginx:alpine
+    runs-on: ubuntu-latest
     needs: test-job
     steps:
       - name: Checkout code
