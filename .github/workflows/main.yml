@@ -23,15 +23,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Instalação de dependências
-        run: npm install
       - name: Run SAST test
         uses: shiftleftsecurity/sast-scan@v2.1.1
         with:
           language: javascript
           scan-path: .
           fail-on-error: true
-          
+
   deploy:
     needs: test
     runs-on: ubuntu-latest
