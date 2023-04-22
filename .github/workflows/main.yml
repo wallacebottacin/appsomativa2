@@ -27,14 +27,9 @@ jobs:
 
       - name: Template de Segurança SAST
         uses: github/codeql-action/init@v2
-        with:
-          languages: javascript
 
       - name: Análise de segurança SAST
         uses: github/codeql-action/analyze@v2
-        with:
-          query: javascript-code-scanning.qls
-          languages: javascript
 
   deploy:
     needs: test
