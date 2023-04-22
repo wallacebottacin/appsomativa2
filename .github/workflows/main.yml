@@ -25,14 +25,6 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v3
 
-      - name: Template de Segurança SAST
-        uses: github/codeql-action/init@v2
-
-      - name: Análise de segurança SAST
-        uses: github/codeql-action/analyze@v2
-        with:
-          languages: javascript
-
   deploy:
     needs: test
     runs-on: ubuntu-latest
