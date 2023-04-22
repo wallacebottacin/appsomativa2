@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Build
         run: echo 'Etapa concluída com sucesso!'
@@ -23,12 +23,22 @@ jobs:
 
     steps:
       - name: Checkout código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+
+      - name: Install CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: html, javascript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
+        with:
+          language: javascript
 
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Deploy
         run: echo "Finalizado!"
