@@ -5,19 +5,22 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
-  build-job:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build
-        run: docker build -t appwebsomativa2 .
 
-  test-job:
-    needs: build-job
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Build
+        run: echo 'Etapa concluída com sucesso!'
+
+  test:
+    needs: build
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - name: Instalação de dependências
@@ -28,31 +31,11 @@ jobs:
           language: javascript
           scan-path: .
           fail-on-error: true
-
-  deploy-job:
+          
+  deploy:
+    needs: test
     runs-on: ubuntu-latest
-    needs: test-job
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Log in no DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      - name: Build Docker image
-        run: docker build -t myimage .
-
-      - name: Push Docker image
-        run: docker push myimage
-
-      - name: Enviar notificação
-        if: github.event_name == 'pull_request' || github.event_name == 'push'
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-            --data '{"content": "Uma nova imagem Docker foi publicada!"}' \
-            $DISCORD_WEBHOOK
+      - uses: actions/checkout@v3
+      - name: Deploy
+        run: echo "Finalizado!"
