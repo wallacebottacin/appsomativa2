@@ -23,7 +23,7 @@ jobs:
       - name: Instalação de dependências
         run: npm install
       - name: Run SAST test
-        uses: shiftleftsecurity/sast-scan@v3
+        uses: shiftleftsecurity/sast-scan@v3.1.2
         with:
           language: javascript
           scan-path: .
