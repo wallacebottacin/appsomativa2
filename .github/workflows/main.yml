@@ -14,7 +14,14 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v3
 
-      - name: Build
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          tags: wbotta/appsomativa2:latest
+
+      - name: Mensagem final
         run: echo 'Etapa concluída com sucesso!'
 
   test:
@@ -23,13 +30,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Instalação de dependências
+        run: npm install
       - name: Run SAST test
         uses: shiftleftsecurity/sast-scan@v2.1.1
         with:
           language: javascript
           scan-path: .
           fail-on-error: true
-
+          
   deploy:
     needs: test
     runs-on: ubuntu-latest
