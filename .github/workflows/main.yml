@@ -30,8 +30,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Instalação de dependências
-        run: npm install
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          tags: wbotta/appsomativa2:latest
       - name: Run SAST test
         uses: shiftleftsecurity/sast-scan@v2.1.1
         with:
