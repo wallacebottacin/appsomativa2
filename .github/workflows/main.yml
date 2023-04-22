@@ -16,13 +16,14 @@ jobs:
         run: docker build -t appwebsomativa2 .
 
   test-job:
+    needs: build-job
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Instalação de dependências
         run: npm install
       - name: Run SAST test
-        uses: shiftleftsecurity/sast-scan@v2.7.0
+        uses: shiftleftsecurity/sast-scan@v3
         with:
           language: javascript
           scan-path: .
